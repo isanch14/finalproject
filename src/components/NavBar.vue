@@ -4,12 +4,12 @@
     :class="ishome ? '' : 'shadow-2xl bg-red-800'"
   >
     <div class="left">
-      <span class="font-semibold"> 
-          Welcome!
+      <span class="font-semibold text-3xl">
+        Welcome!
       </span>
     </div>
     <div class="right">
-      <router-link class="link" to="/">Home</router-link>
+      <router-link class="link" to="/">Home</router-link> |
       <router-link class="link" to="/About">About</router-link>
     </div>
   </nav>
