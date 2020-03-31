@@ -9,11 +9,8 @@
       <div
         class="absolute h-screen w-screen top-0 flex flex-col justify-center items-center"
       >
-        <h1
-          class="text-6xl font-bold text-white px-4 hover:bg-white hover:text-red-800 opacity-75"
-        >
-          Poco Bueno Ranch
-        </h1>
+      <img :src="logo" alt="">
+        
       </div>
     </div>
   </div>
@@ -22,6 +19,7 @@
 <script>
 import NavBar from '../components/NavBar'
 import bgImage from '../assets/horsebackground.jpg'
+import logo from '../assets/pocobueno.png'
 export default {
   name: 'Home',
   components: {
@@ -29,7 +27,8 @@ export default {
   },
   data() {
     return {
-      bgImage
+      bgImage,
+      logo
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="min-h-screen bg-red-800">
     <router-view />
     <Footer />
   </div>
