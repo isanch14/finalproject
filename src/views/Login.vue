@@ -1,5 +1,5 @@
 <template>
-  <div id="firebaseui-auth-container" class="mt-8"></div>
+  <div class="pt-24" id="firebaseui-auth-container"></div>
 </template>
 
 <script>
@@ -10,7 +10,7 @@ export default {
       callbacks: {
         signInSuccessWithAuthResult: authResult => {
           this.$store.dispatch('setUser', authResult.user)
-          this.$router.push('/')
+          this.$router.push('/Private')
           return false
         }
       },

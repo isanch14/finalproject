@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <NavBar />
-    <div
+<div
       class="relative h-screen w-screen bg-cover bg-center shadow-2xl"
       :style="`background-image:url(${bgImage})`"
     >
@@ -13,23 +11,21 @@
         
       </div>
     </div>
-  </div>
-</template>
+    </template>
 
 <script>
-import NavBar from '../components/NavBar'
 import bgImage from '../assets/horsebackground.jpg'
 import logo from '../assets/pocobueno.png'
+
 export default {
-  name: 'Home',
-  components: {
-    NavBar
-  },
+  name:'Home',
   data() {
     return {
       bgImage,
       logo
     }
-  }
+  }    
 }
 </script>
+
+<style lang="scss" scoped></style>

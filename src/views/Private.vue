@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="pt-24">
     <div
-      class="flex flex-col items-center bg-white rounded-lg p6 w-1/3 mx-auto mt-8"
+      class="flex flex-col items-center bg-white rounded-lg p6 w-1/3 mx-auto"
     >
       <img
         :src="user.photoURL || defaultPicture"

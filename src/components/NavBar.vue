@@ -4,13 +4,38 @@
     :class="ishome ? '' : 'shadow-2xl bg-red-800'"
   >
     <div class="left">
-      <span class="font-semibold text-3xl">
-        Welcome!
-      </span>
+      <router-link to="/" class="font-semibold text-3xl">
+        {{$route.name}}
+      </router-link>
     </div>
-    <div class="right">
-      <router-link class="link" to="/Login">Login</router-link> |
-      <router-link class="link" to="/About">About</router-link>
+    <div>
+      <span v-if="user" class="text-black font-bold mr-8"
+        >Welcome <span class="font-normal">{{ user.displayName }}</span></span
+      >
+      <router-link
+        v-if="!user"
+        class="p-2 mx-1 hover:text-purple-900 hover:bg-gray-300"
+        to="/login"
+        >Login</router-link
+      >
+      <button
+        v-if="user"
+        class="p-2 mx-1 hover:text-purple-900 hover:bg-gray-300"
+        @click="logOut"
+      >
+        Logout
+      </button>
+      <router-link
+        class="p-2 mx-1 hover:text-purple-900 hover:bg-gray-300"
+        to="/about"
+        >About</router-link
+      >
+      <router-link
+        v-if="user"
+        class="p-2 mx-1 text-black hover:text-purple-900 hover:bg-gray-300"
+        to="/private"
+        >Private</router-link
+      >
     </div>
   </nav>
 </template>
@@ -23,6 +48,18 @@ export default {
       type: Boolean,
       default: true
     }
+  },
+  computed: {
+    user() {
+      return this.$store.getters.getUser
+    }
+  },
+  methods: {
+    logOut() {
+      this.$firebase.auth().signOut()
+      this.$store.dispatch('setUser', '')
+      this.$router.push('/')
+    }
   }
 }
 </script>
@@ -34,7 +71,7 @@ export default {
 .link {
   @apply px-2 font-semibold;
   &:hover {
-    @apply text-purple-800;
+    @apply text-purple-900;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-10/12 mx-auto mt-8">
+  <div class="w-10/12 mx-auto pt-24">
     <h1 class="text-black-800 font-hairline text-6xl">
       Poco Bueno Ranch History
     </h1>
