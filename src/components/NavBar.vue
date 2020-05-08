@@ -1,9 +1,8 @@
 <template>
-  <v-app-bar app color="primary" dark>
+  <v-app-bar app color="red" dark>
     <v-toolbar-title class="font-weight-light">
       <v-btn text class="text-none font-weight-light headline" @click="$router.push('/')">
-        <span>Poco Bueno</span>
-        <span class="font-weight-regular">Ranch</span>
+        <span>Poco Bueno Ranch</span>
       </v-btn>
     </v-toolbar-title>
 
@@ -38,8 +37,8 @@
               <v-btn block text to="/cart">Cart</v-btn>
             </v-list-item-title>
           </v-list-item>
-          <v-list-item>
-            <v-list-item-title>
+          <v-list-item v-if="user.roles && user.roles.admin">
+            <v-list-item-title>            
               <v-btn block text to="/inventory">Inventory</v-btn>
             </v-list-item-title>
           </v-list-item>
@@ -56,7 +55,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { db } from '../plugins/firebase'
 
 export default {
   name: 'NavBar',
@@ -70,17 +68,11 @@ export default {
       user: 'getUser',
     }),
   },
-  beforeUpdate() {
-    this.bind()
-  },
   methods: {
     async logOut() {
       await this.$firebase.auth().signOut()
       this.setUser('')
       this.$router.push('/')
-    },
-    async bind() {
-      await this.$bind('cart', db.collection('cart').doc(this.user.uid))
     },
     ...mapActions(['setUser']),
   },
