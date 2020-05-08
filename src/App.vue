@@ -1,22 +1,18 @@
 <template>
-  <div class="bg-red-800">
+  <v-app>
     <NavBar />
-  <div class="min-h-screen shadow-2xl">
+    <v-content>
       <router-view />
-  </div>
-    <Footer />
-  </div>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import Footer from './components/Footer'
-import NavBar from './components/NavBar'
-
+import NavBar from '@/components/NavBar.vue'
 export default {
-  name: 'MainApp',
+  name: 'App',
   components: {
-    Footer,
-    NavBar
-  }
+    NavBar,
+  },
 }
 </script>

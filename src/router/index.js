@@ -2,38 +2,24 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
-import About from '../views/About.vue'
-import Private from '../views/Private.vue'
+import MyOrders from '../views/MyOrders.vue'
+import Cart from '../views/Cart.vue'
+import Inventory from '../views/Inventory.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path:'/',
-    name: 'Welcome!',
-    component: Home
-  },
-  {
-    path:'/login',
-    name: 'Login',
-    component: Login
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: About
-  },
-  {
-    path:'/private',
-    name: 'Private',
-    component: Private
-  }
+  { path: '/', name: 'Home', component: Home },
+  { path: '/login', name: 'Login', component: Login },
+  { path: '/myorders', name: 'MyOrders', component: MyOrders },
+  { path: '/cart', name: 'Cart', component: Cart },
+  { path: '/inventory', name: 'Inventory', component: Inventory },
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router

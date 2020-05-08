@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-24" id="firebaseui-auth-container"></div>
+  <div id="firebaseui-auth-container" class="mt-8"></div>
 </template>
 
 <script>
@@ -8,20 +8,15 @@ export default {
   mounted() {
     const uiConfig = {
       callbacks: {
-        signInSuccessWithAuthResult: authResult => {
-          this.$store.dispatch('setUser', authResult.user)
-          this.$router.push('/Private')
+        signInSuccessWithAuthResult: async (data) => {
+          this.$store.dispatch('setUser', data.user)
+          this.$router.push('/')
           return false
-        }
+        },
       },
-      signInOptions: [
-        this.$firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        this.$firebase.auth.EmailAuthProvider.PROVIDER_ID
-      ]
+      signInOptions: [this.$firebase.auth.GoogleAuthProvider.PROVIDER_ID, this.$firebase.auth.EmailAuthProvider.PROVIDER_ID],
     }
     this.$firebaseui.start('#firebaseui-auth-container', uiConfig)
-  }
+  },
 }
 </script>
-
-<style lang="scss" scoped></style>

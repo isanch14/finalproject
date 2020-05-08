@@ -1,77 +1,88 @@
 <template>
-  <nav
-    class="nav w-screen z-20 text-black"
-    :class="ishome ? '' : 'shadow-2xl bg-red-800'"
-  >
-    <div class="left">
-      <router-link to="/" class="font-semibold text-3xl">
-        {{$route.name}}
-      </router-link>
+  <v-app-bar app color="primary" dark>
+    <v-toolbar-title class="font-weight-light">
+      <v-btn text class="text-none font-weight-light headline" @click="$router.push('/')">
+        <span>Poco Bueno</span>
+        <span class="font-weight-regular">Ranch</span>
+      </v-btn>
+    </v-toolbar-title>
+
+    <v-spacer></v-spacer>
+
+    <v-btn v-if="!user" to="/login" text>
+      <span class="mr-2">Login</span>
+    </v-btn>
+    <div v-else>
+      <v-menu bottom left>
+        <template v-slot:activator="{ on }">
+          <v-btn text v-on="on">
+            <span class="mr-2">{{ user.displayName }}</span>
+            <v-icon>mdi-menu-down</v-icon>
+          </v-btn>
+          <v-badge color="error" overlap>
+            <template v-slot:badge>{{ cart.items.length }}</template>
+            <v-btn text @click="$router.push('/cart')">
+              <v-icon>mdi-cart</v-icon>
+            </v-btn>
+          </v-badge>
+        </template>
+
+        <v-list>
+          <v-list-item>
+            <v-list-item-title>
+              <v-btn block text to="/myorders">My Orders</v-btn>
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>
+              <v-btn block text to="/cart">Cart</v-btn>
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>
+              <v-btn block text to="/inventory">Inventory</v-btn>
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>
+              <v-btn block text @click="logOut">Logout</v-btn>
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </div>
-    <div>
-      <span v-if="user" class="text-black font-bold mr-8"
-        >Welcome <span class="font-normal">{{ user.displayName }}</span></span
-      >
-      <router-link
-        v-if="!user"
-        class="p-2 mx-1 hover:text-purple-900 hover:bg-gray-300"
-        to="/login"
-        >Login</router-link
-      >
-      <button
-        v-if="user"
-        class="p-2 mx-1 hover:text-purple-900 hover:bg-gray-300"
-        @click="logOut"
-      >
-        Logout
-      </button>
-      <router-link
-        class="p-2 mx-1 hover:text-purple-900 hover:bg-gray-300"
-        to="/about"
-        >About</router-link
-      >
-      <router-link
-        v-if="user"
-        class="p-2 mx-1 text-black hover:text-purple-900 hover:bg-gray-300"
-        to="/private"
-        >Private</router-link
-      >
-    </div>
-  </nav>
+  </v-app-bar>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+import { db } from '../plugins/firebase'
+
 export default {
   name: 'NavBar',
-  props: {
-    ishome: {
-      type: Boolean,
-      default: true
+  data() {
+    return {
+      cart: {},
     }
   },
   computed: {
-    user() {
-      return this.$store.getters.getUser
-    }
+    ...mapGetters({
+      user: 'getUser',
+    }),
+  },
+  beforeUpdate() {
+    this.bind()
   },
   methods: {
-    logOut() {
-      this.$firebase.auth().signOut()
-      this.$store.dispatch('setUser', '')
+    async logOut() {
+      await this.$firebase.auth().signOut()
+      this.setUser('')
       this.$router.push('/')
-    }
-  }
+    },
+    async bind() {
+      await this.$bind('cart', db.collection('cart').doc(this.user.uid))
+    },
+    ...mapActions(['setUser']),
+  },
 }
 </script>
-
-<style lang="scss" scoped>
-.nav {
-  @apply h-24 fixed px-12 flex justify-between items-center;
-}
-.link {
-  @apply px-2 font-semibold;
-  &:hover {
-    @apply text-purple-900;
-  }
-}
-</style>
