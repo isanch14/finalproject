@@ -29,7 +29,11 @@ const store = new Vuex.Store({
         const userRef = db.collection('users').doc(user.uid)
         await userRef.set(userObject, { merge: true })
         const userDB = await userRef.get()
-        commit('settingUser', { uid: user.uid, ...userDB.data() })      
+        commit('settingUser', { uid: user.uid, ...userDB.data() })
+        await db.collection('cart').doc(user.uid).set({
+          items: [],
+          total: 0,
+        })
       } else {
         commit('settingUser', '')
       }
