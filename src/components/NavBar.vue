@@ -37,6 +37,11 @@
               <v-btn block text to="/cart">Cart</v-btn>
             </v-list-item-title>
           </v-list-item>
+          <v-list-item>
+            <v-list-item-title>
+              <v-btn block text to="/about">About</v-btn>
+            </v-list-item-title>
+          </v-list-item>
           <v-list-item v-if="user.roles && user.roles.admin">
             <v-list-item-title>            
               <v-btn block text to="/inventory">Inventory</v-btn>

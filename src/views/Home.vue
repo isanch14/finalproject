@@ -1,4 +1,4 @@
-<template>  
+<template>
   <v-container>
     <v-row>
       <h1>Welcome to the Poco Bueno Ranch Shop!</h1>
