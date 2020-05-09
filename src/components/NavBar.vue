@@ -79,7 +79,7 @@ export default {
       this.$router.push('/')
     },
     async bind() {
-      await this.$bind('cart' , db.collection('cart').doc(this.user.uid))
+      await this.$bind('cart', db.collection('cart').doc(this.user.uid))    
     },
     ...mapActions(['setUser']),
   },

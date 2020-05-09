@@ -33,7 +33,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import { db } from '../plugins/firebase'
-
 export default {
   name: 'Home',
   data() {
@@ -55,16 +54,16 @@ export default {
     },
     async addToCart(product) {
       await db
-      .collection('cart')
-      .doc(this.user.uid)
-      .update({
-        items: this.$firebase.firestore.FieldValue.arrayUnion({
-          id: product.id,
-          name: product.name,
-          quantity: 1,
-          price: product.price,
-        }),
-      })
+        .collection('cart')
+        .doc(this.user.uid)
+        .update({
+          items: this.$firebase.firestore.FieldValue.arrayUnion({
+            id: product.id,
+            name: product.name,
+            quantity: 1,
+            price: product.price,
+          }),
+        })
     },
   },
 }
