@@ -5,6 +5,7 @@
         <h1 class="mb-4">Contact Poco Bueno Ranch</h1>
         <v-card>
           <v-card-text>
+            <p>Poco Bueno Ranch Owners:</p>
             <p>Sharolyn Davis</p>
             <p>Cell Phone: 956-279-6473</p><br>
             <p>Israel Sanchez Jr.</p>

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <h1>Welcome to the Poco Bueno Ranch Shop!</h1>
+      <h1>Welcome, Interested in Any Lessons!?</h1>
     </v-row>
     <v-row>
       <v-col v-for="product in products" :key="product.id" cols="12" md="6" lg="4">
