@@ -29,6 +29,11 @@
         <v-list>
           <v-list-item>
             <v-list-item-title>
+              <v-btn block text to="/home">Home</v-btn>
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>
               <v-btn block text to="/myorders">My Orders</v-btn>
             </v-list-item-title>
           </v-list-item>
@@ -40,6 +45,11 @@
           <v-list-item>
             <v-list-item-title>
               <v-btn block text to="/about">About</v-btn>
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>
+              <v-btn block text to="/contact">Contact</v-btn>
             </v-list-item-title>
           </v-list-item>
           <v-list-item v-if="user.roles && user.roles.admin">
